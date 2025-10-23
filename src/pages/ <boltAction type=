@@ -1,0 +1,144 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Check } from 'lucide-react';
+
+const plans = [
+  {
+    name: 'Basic',
+    price: 'Free',
+    description: 'Perfect for businesses exploring AI solutions',
+    features: [
+      'Post up to 2 projects',
+      'Basic project management tools',
+      'Access to agency directory',
+      'Email support',
+    ],
+    cta: 'Get Started',
+    popular: false,
+  },
+  {
+    name: 'Professional',
+    price: '$99',
+    period: 'per month',
+    description: 'Ideal for growing businesses',
+    features: [
+      'Post unlimited projects',
+      'Advanced project management',
+      'Priority agency matching',
+      'Dedicated account manager',
+      'Phone & email support',
+      'Analytics dashboard',
+    ],
+    cta: 'Start Free Trial',
+    popular: true,
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    description: 'For large organizations with complex needs',
+    features: [
+      'All Professional features',
+      'Custom integration options',
+      'Multi-user access',
+      'SLA guarantees',
+      'Custom reporting',
+      '24/7 priority support',
+    ],
+    cta: 'Contact Sales',
+    popular: false,
+  },
+];
+
+export function Pricing() {
+  return (
+    <div className="min-h-screen bg-brand-dark/5 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-brand-dark mb-4 font-playfair">
+            Simple, Transparent Pricing
+          </h1>
+          <p className="text-xl text-brand-dark/70 max-w-2xl mx-auto">
+            Choose the perfect plan for your business needs. No hidden fees, cancel anytime.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`relative bg-white rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 ${
+                plan.popular ? 'ring-2 ring-brand-light' : ''
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute top-0 right-0 bg-brand-light text-white px-4 py-1 rounded-tr-lg rounded-bl-lg text-sm font-medium">
+                  Most Popular
+                </div>
+              )}
+              <div className="p-8">
+                <h3 className="text-xl font-bold text-brand-dark mb-2">{plan.name}</h3>
+                <div className="mb-4">
+                  <span className="text-4xl font-bold text-brand-dark">{plan.price}</span>
+                  {plan.period && (
+                    <span className="text-brand-dark/70 ml-2">{plan.period}</span>
+                  )}
+                </div>
+                <p className="text-brand-dark/70 mb-6">{plan.description}</p>
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center text-brand-dark/70">
+                      <Check className="w-5 h-5 text-brand-light mr-2 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to={plan.name === 'Enterprise' ? '/contact' : '/register'}
+                  className={`block w-full text-center py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${
+                    plan.popular
+                      ? 'bg-brand-light text-white hover:bg-brand-light/90'
+                      : 'bg-brand-dark/5 text-brand-dark hover:bg-brand-dark/10'
+                  }`}
+                >
+                  {plan.cta}
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-brand-dark mb-8 text-center font-playfair">
+            Frequently Asked Questions
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                q: 'What payment methods do you accept?',
+                a: 'We accept all major credit cards, PayPal, and bank transfers for enterprise customers.',
+              },
+              {
+                q: 'Can I cancel my subscription anytime?',
+                a: 'Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period.',
+              },
+              {
+                q: 'Is there a free trial available?',
+                a: 'Yes, we offer a 14-day free trial on our Professional plan with full access to all features.',
+              },
+              {
+                q: 'Do you offer custom enterprise solutions?',
+                a: 'Yes, we provide customized solutions for enterprise customers. Contact our sales team to discuss your needs.',
+              },
+            ].map((faq, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-brand-dark mb-2">{faq.q}</h3>
+                <p className="text-brand-dark/70">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-light;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+
+  a:not(.btn-primary):not(.btn-secondary) {
+    @apply transition-colors duration-200;
+  }
+
+  a:not(.btn-primary):not(.btn-secondary):hover {
+    @apply text-brand-yellow;
+  }
+
+  #root {
+    @apply flex flex-col min-h-screen;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply text-gray-400 hover:text-brand-yellow px-3 py-2 text-sm font-medium transition-colors duration-200;
+  }
+
+  .nav-link-active {
+    @apply text-white hover:text-brand-yellow px-3 py-2 text-sm font-medium;
+  }
+
+  .btn-primary {
+    @apply bg-brand-light text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-light/90 transition-all duration-200 transform hover:scale-105 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-brand-light px-8 py-3 rounded-lg font-semibold border-2 border-brand-light hover:bg-brand-light/5 transition-all duration-200 transform hover:scale-105;
+  }
+}
+
+.menu-slide-enter {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-slide-enter-active {
+  transform: translateX(0%);
+}
+
+.menu-slide-exit {
+  transform: translateX(0%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-slide-exit-active {
+  transform: translateX(-100%);
+}
